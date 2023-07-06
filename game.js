@@ -1,6 +1,6 @@
 function getComputerChoice() {
     let randomNumber = Math.floor(Math.random() * 3) + 1;
-    // console.log(randomNumber);
+    console.log(randomNumber);
 
     if (randomNumber === 1) {
         return "Rock"
@@ -16,7 +16,7 @@ function getComputerChoice() {
 function capitalize(string) {
     const firstLetter = string.charAt(0);
     const restOfString = string.slice(1);
-    
+
     return firstLetter.toUpperCase() + restOfString.toLowerCase();
 }
 
@@ -52,49 +52,52 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
-// const playerSelection = "rock";
-// const computerSelection = getComputerChoice();
-// console.log(computerSelection)
-// console.log(playRound(playerSelection, computerSelection));
-
-// prompt() for user input
-
-// let text = "...win..."
-// text.search(string) returns the index(poisition of the first match)
-//      or -1 otherwise.
-
 function game() {
 
-    let playerWins = 0
-    let computerWins = 0
-    let ties = 0
+    let playerWins = 0;
+    let computerWins = 0;
+    let ties = 0;
 
-    for (let i = 0; i < 5; i++) {
-        let computerSelection = getComputerChoice()
-        // console.log(computerSelection)
-        let playerSelection = prompt("Please enter Rock, Paper, or Scissors: ")
+    alert("press button face computer");
 
-        let round = playRound(playerSelection, computerSelection)
+    const buttons = document.querySelectorAll('button');
 
-        if (round.search("tie") !== -1) {
-            console.log("It's a tie this round!")
-            ties++
-        }
+    const body = document.querySelector('body');
+    const results = document.createElement('div');
 
-        else if (round.search("win") !== -1) {
-            console.log("Player wins this round!")
-            playerWins++
-        }
+    results.classList.add('results');
+    body.appendChild(results);
+    results.textContent = `Player Score: ${playerWins}, Bot Score: ${computerWins}, Ties: ${ties}`;
 
-        else {
-            console.log("Computer wins this round!")
-            computerWins++
-        }
-    }
 
-    console.log("Player Wins: " + playerWins)
-    console.log("Computer Wins: " + computerWins)
-    console.log("Ties: " + ties)
+    buttons.forEach((button) => {
+
+        button.addEventListener('click', () => {
+            let round = playRound(button.id, getComputerChoice());
+            // console.log(round);
+
+            if (round.search("tie") !== -1) {
+                // console.log("It's a tie this round!")
+                ties++
+            }
+
+            else if (round.search("win") !== -1) {
+                // console.log("Player wins this round!")
+                playerWins++
+            }
+
+            else {
+                // console.log("Computer wins this round!")
+                computerWins++
+            }
+
+            results.textContent = `Player Score: ${playerWins}, Bot Score: ${computerWins}, Ties: ${ties}`;
+
+        })
+    });
+
+
+
 }
 
 game()

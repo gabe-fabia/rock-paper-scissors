@@ -92,8 +92,15 @@ function game() {
             }
 
             results.textContent = `Player Score: ${playerWins}, Bot Score: ${computerWins}, Ties: ${ties}`;
-
+            if (playerWins == 5) {
+                alert("Player Wins!");
+            }
+            else if (computerWins == 5) {
+                alert("Computer Wins!")
+            }
         })
+
+    
     });
 
 
